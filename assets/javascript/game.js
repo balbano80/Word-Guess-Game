@@ -1,13 +1,11 @@
 
 
 
-var wordList = ["merry", "loxley", "rottingham", "lincoln", "scarlett", "robin"];
+var wordList = ["merry", "loxley", "rottingham", "lincoln", "scarlett", "robin", "blinkin", "achoo"];
 var musicList =["chill.wav", "ears.wav", "yea.wav", "hand_ove.wav", "willy.wav", "achtung.wav", "cantjump.wav", "cotton.wav", "guessing.wav", "noise.wav"]
 var index;
-//= Math.floor(Math.random() * wordList.length);
 var targetWord ;
-//= wordList[index];
-// wordList.splice(index, 1);
+
 var displayWord = "";
 var letterCount;
 var lettersUsed;
@@ -30,10 +28,6 @@ function newGame(arr){
   console.log(wordList);
   guessLetter();
 }
-
-// for(var i = 0; i < targetWord.length; i++){
-//   displayWord += "_";
-// }
 
 function guessLetter(){
   document.getElementById("display-message").textContent = "Guess a letter";
@@ -66,26 +60,19 @@ function openGif(){
 
 }
 
-// document.getElementById("targetWord").textContent = displayWord; 
-// guessLetter();
 newGame(wordList);
 
 document.onkeyup = function(event) {
 
   var input = event.key;
 
-
-  if(tries === 0){
-    return;
-    //input lost gif//
-  }
   console.log("letterCount: " + letterCount + " word length: " + targetWord.length);
   document.getElementById("display-message").textContent = "Guess a letter";
     if(lettersUsed.indexOf(input) >=0){
       document.getElementById("display-message").textContent = "Letter " + input + " already used";
       return;
     }
-    else if(!isLetter(input) || input === "Shift" || input === "Enter" || input === "Backspace"){
+    else if(!isLetter(input) || input === "Shift" || input === "Enter" || input === "Backspace" || input === "CapsLock" || input === "Meta"){
       document.getElementById("display-message").textContent = input + " is not a letter";
       return;
     }
@@ -109,7 +96,6 @@ document.onkeyup = function(event) {
 
 
     if(letterCount === 0){
-      // input you win stuff and figure out out how to get game to go again
       wins++;
       document.getElementById("numWins").textContent = wins;
       console.log(wordList);
@@ -140,20 +126,13 @@ document.onkeyup = function(event) {
     document.querySelector("#guessed").innerHTML = "";
     document.querySelector("#game").innerHTML = "<img class='img-responsive mx-auto d-block border' src='assets/images/iLost.gif'>"
     document.querySelector("#music").innerHTML = "<audio autoplay><source src='assets/music/bye.wav' type='audio/wav'></audio>";
+    document.querySelector("#link").innerHTML = "<a href='https://balbano80.github.io/Word-Guess-Game/'><button>Play again?</button></a>";
     return;
-    //input lost gif//
   }
 
   if(wins === wordList.length){
     document.getElementById("display-message").textContent = "YOU'VE WON!!!";
   }
-  // else if(letterCount === 0){
-  // // input you win stuff and figure out out how to get game to go again
-  //   wins++;
-  //   document.getElementById("numWins").textContent = wins;
-  //   if(wordList > 0){
-  //     newGame(wordList);
-  //   }
-  // document.getElementById("numWins").textContent = wins;
+
   document.getElementById("lettersUsed").textContent = lettersUsed;
 }
