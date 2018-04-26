@@ -2,6 +2,7 @@
 
 
 var wordList = ["merry", "loxley", "rottingham", "lincoln", "scarlett", "robin"];
+var musicList =["chill.wav", "ears.wav", "yea.wav", "hand_ove.wav", "willy.wav", "achtung.wav", "cantjump.wav", "cotton.wav", "guessing.wav", "noise.wav"]
 var index;
 //= Math.floor(Math.random() * wordList.length);
 var targetWord ;
@@ -60,6 +61,11 @@ function changeLetter(targetWord, displayWord, input){
   return displayWord;
 }
 
+function openGif(){
+  document.querySelector("#game").innerHTML = "<img class='img-responsive mx-auto d-block border' src='assets/images/yes.gif'>"
+
+}
+
 // document.getElementById("targetWord").textContent = displayWord; 
 // guessLetter();
 newGame(wordList);
@@ -104,19 +110,43 @@ document.onkeyup = function(event) {
 
     if(letterCount === 0){
       // input you win stuff and figure out out how to get game to go again
-        wins++;
-        document.getElementById("numWins").textContent = wins;
+      wins++;
+      document.getElementById("numWins").textContent = wins;
       console.log(wordList);
+      var musicChoice = musicList[Math.floor(Math.random() * musicList.length)];
+      document.querySelector("#music").innerHTML = "<audio autoplay><source src='assets/music/" + musicChoice + "' type='audio/wav'> </audio>";
+      //look into getting below gif to stop after so long
+      // var aud = document.getElementById("#music");
+      // aud.onplaying = function(){
+      //   console.log("hello");
+      //   document.querySelector("#game").innerHTML = "<img class='img-responsive mx-auto d-block border' src='assets/images/yes.gif'>";
+      // }
+      
       if(wordList.length > 0){
         console.log("entering new game block");
         displayWord = "";
         newGame(wordList);
       }
+      else{
+        document.getElementById("display-message").textContent = "Congratulations.... YOU'VE WON!!!";
+        document.querySelector("#guessed").innerHTML = "";
+        document.querySelector("#music").innerHTML = "<audio controls autoplay><source src='assets/music/menintig.wav' type='audio/wav'></audio>";
+        document.querySelector("#game").innerHTML = "<img class='img-responsive mx-auto d-block border' src='assets/images/win.gif'>"
+        return;
+      }
     }
-  // if(tries === 0){
-  //   return;
-  //   //input lost gif//
-  // }
+  if(tries === 0){
+    document.getElementById("display-message").textContent = "Haha... You lose!!!!";
+    document.querySelector("#guessed").innerHTML = "";
+    document.querySelector("#game").innerHTML = "<img class='img-responsive mx-auto d-block border' src='assets/images/iLost.gif'>"
+    document.querySelector("#music").innerHTML = "<audio autoplay><source src='assets/music/bye.wav' type='audio/wav'></audio>";
+    return;
+    //input lost gif//
+  }
+
+  if(wins === wordList.length){
+    document.getElementById("display-message").textContent = "YOU'VE WON!!!";
+  }
   // else if(letterCount === 0){
   // // input you win stuff and figure out out how to get game to go again
   //   wins++;

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="container background game">
+    <div class="container background">
         <div class="row logo">
             <div class="col-md-6 mt-2 pl-1 pr-1 float-left">
                 <img src="assets/images/hangmanMIT.jpg" class="main-img" alt="Robin Hood Men in Tights Hangman">
@@ -32,20 +32,23 @@
             <div class="col-md-6 float-left text-center">
                <p class="message-window"><span id="display-message">Press any button to start</span></p>
             </div>
-            <div class="col-md-6 float-left text-center">
+            <div class="col-md-6 float-left text-center" id="game">
                 <h4>Current Word</h4>
                 <p class="display-word"><span id="targetWord"></span></p>
             </div>
         </div>
-        <div class="row main-content mt-2">   
+        <div class="row main-content mt-2 height: 200px" >   
             <div class="col-md-6 float-left pl-5">
                 <h4>Wins: <span id="numWins">0</span></h4>
                 <br>
                 <h4>Number of Guesses left: <span id="numGuesses">7</span></h4>
+                <audio autoplay class="float-left mt-4 " id="music">
+                    <source src="assets/music/accent.wav" type="audio/wav">
+                </audio>
             </div>
-            <div class="col-md-6 float-left text-center">
+            <div class="col-md-6 float-left text-center" id="guessed">
                 <h4>Letters already guessed</h4>
-                <p><span id="lettersUsed"></span></p>
+                <h4><span id="lettersUsed"></span></h4>
             </div>
         </div>
     </div>  
