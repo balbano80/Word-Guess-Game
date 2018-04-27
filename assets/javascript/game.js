@@ -1,7 +1,10 @@
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// For Testing Purposes - answers/targetWord is being logged to console
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
-var wordList = ["maid marian", "robin of loxley", "blinkin", "achoo", "little john", "mervyn sherrif of rottingham"];
+// Variables
+var wordList = ["maid marian", "robin of loxley", "blinkin", "ahchoo", "little john", "mervyn sherrif of rottingham", "patriot arrow", "chastity belt"];
 var musicList =["chill.wav", "ears.wav", "yea.wav", "hand_ove.wav", "willy.wav", "achtung.wav", "cantjump.wav", "cotton.wav", "guessing.wav", "noise.wav"]
 var index;
 var targetWord ;
@@ -11,24 +14,6 @@ var letterCount;
 var lettersUsed;
 var tries = 7;
 var wins = 0;
-
-
-// function newGame(arr){
-//   index = Math.floor(Math.random() * wordList.length);
-//   targetWord = wordList[index];
-//   wordList.splice(index, 1);
-//   letterCount = targetWord.length;
-//   lettersUsed = "";
-//   console.log(targetWord);
-//   for(var i = 0; i < targetWord.length; i++){
-//       displayWord += "_";
-//   }
-//   tries = 7
-//   document.getElementById("numGuesses").textContent = tries;
-//   document.getElementById("targetWord").textContent = displayWord;
-//   console.log(targetWord);
-//   guessLetter();
-//  } 
 
 function newGame(arr){
   index = Math.floor(Math.random() * wordList.length);
@@ -50,7 +35,7 @@ function newGame(arr){
   }
   targetWord = targetWord.join("");
   displayWord = displayWord.join("");
-  tries = 7
+  tries = 10;
   document.getElementById("numGuesses").textContent = tries;
   document.getElementById("targetWord").textContent = displayWord;
   console.log(targetWord);
@@ -82,7 +67,6 @@ function changeLetter(targetWord, displayWord, input){
     if (targetWord[i] === input){
       displayWord[i] = input;
       letterCount--;
-      // console.log("decreasing letterCount to : " + letterCount);
     }
   }
   displayWord = displayWord.join("");
@@ -99,8 +83,6 @@ newGame(wordList);
 document.onkeyup = function(event) {
 
   var input = event.key;
-
-  // console.log("letterCount: " + letterCount + " word length: " + targetWord.length);
 
   document.getElementById("display-message").textContent = "Guess a letter";
 
@@ -141,7 +123,6 @@ document.onkeyup = function(event) {
   if(letterCount === 0){
     wins++;
     document.getElementById("numWins").textContent = wins;
-    console.log(wordList);
     var musicChoice = musicList[Math.floor(Math.random() * musicList.length)];
     document.querySelector("#music").innerHTML = "<audio autoplay><source src='assets/music/" + musicChoice + "' type='audio/wav'> </audio>"
     
@@ -178,11 +159,10 @@ document.onkeyup = function(event) {
     // 2. Sets guessed id(div that contained display word and letters guessed) to empty string
     // 3. Displays lose GIF
     // 4. Runs lose audio clip
-    // 5. Displays a "Play again?" button that is a link to the github repository address
+    // 5. Displays a "Play again?" button that is alink to the github repository address
 
   if(wins === wordList.length){
     document.getElementById("display-message").textContent = "YOU'VE WON!!!";
   } // This one probably is replaced too fast with newGame function
 
-  // document.getElementById("lettersUsed").textContent = lettersUsed;
 }
